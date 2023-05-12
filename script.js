@@ -161,3 +161,29 @@ showReponses(2)
 showReponses(3)
 showReponses(4)
 showReponses(5)
+
+function getReponse(numQuestion) {
+    const listReponses = document.getElementsByName(`reponsesQ${numQuestion}`)
+
+    for (let i = 0; i < listReponses.length; i++) {
+        if (listReponses[i].checked) { var reponse = listReponses[i].value}
+    }
+    return reponse
+}
+
+function verifReponses() {
+    const reponse1 = shuffledRepQ1.find(element => element.text == getReponse(1))
+    const reponse2 = shuffledRepQ2.find(element => element.text == getReponse(2))
+    const reponse3 = shuffledRepQ3.find(element => element.text == getReponse(3))
+    const reponse4 = shuffledRepQ4.find(element => element.text == getReponse(4))
+    const reponse5 = shuffledRepQ5.find(element => element.text == getReponse(5))
+    let score = 0
+
+    score = (reponse1.bonneRep) ? score + 1 : score
+    score = (reponse2.bonneRep) ? score + 1 : score
+    score = (reponse3.bonneRep) ? score + 1 : score
+    score = (reponse4.bonneRep) ? score + 1 : score
+    score = (reponse5.bonneRep) ? score + 1 : score
+
+    console.log(score)
+}
