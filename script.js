@@ -99,7 +99,7 @@ function shuffle(answers) {
     }
 
     // Renvoie un array avec les éléments mélangés
-    return shuffledAnswers
+    return shuffledAnswers;
 }
 
 // Mélange de chaque tableau de réponses
@@ -108,3 +108,16 @@ const shuffledRepQ2 = shuffle(reponsesQ2)
 const shuffledRepQ3 = shuffle(reponsesQ3)
 const shuffledRepQ4 = shuffle(reponsesQ4)
 const shuffledRepQ5 = shuffle(reponsesQ5)
+
+console.log(shuffledRepQ1);
+console.log(shuffledRepQ5);
+
+
+
+  
+        // ajout des propositions de réponse de la 1er question sous forme de checkbox 
+        //let input1 = document.querySelectorAll('#q1');
+        // input1.forEach((input1, index) => {
+        //     input1.textContent = shuffledRepQ1[index].text;
+        //     input1.value = shuffledRepQ1[index].bonneRep;
+        // });
