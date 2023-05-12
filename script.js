@@ -109,124 +109,55 @@ const shuffledRepQ3 = shuffle(reponsesQ3)
 const shuffledRepQ4 = shuffle(reponsesQ4)
 const shuffledRepQ5 = shuffle(reponsesQ5)
 
+function showReponses(numQuestion) {
+    // Récupération de la div contenant les inputs
+    let divInput = document.getElementById(`question${numQuestion}`);
 
+    // Selection de l'array de reponses correspondant a la question demandée en paramètre
+    let reponses
+    switch(numQuestion) {
+        case 1: 
+            reponses = shuffledRepQ1
+            break;
+        case 2: 
+            reponses = shuffledRepQ2
+            break;
+        case 3: 
+            reponses = shuffledRepQ3
+            break;
+        case 4: 
+            reponses = shuffledRepQ4
+            break;
+        case 5: 
+            reponses = shuffledRepQ5
+            break;    
+    }
 
+    // Boucle pour créer un input par proposition de réponse
+    for (let i = 0; i < reponses.length; i++) {
+        // Création de l'input
+        const input = document.createElement('input');
+        
+        // Ajout de l'attribut "type" de type "radio"
+        input.type = 'radio';
+        input.name = `reponsesQ${numQuestion}`
+        
+        // Ajout de la valeur de la proposition de réponse
+        input.value = reponses[i].text;
+        
+        // Création de l'étiquette pour l'input
+        const label = document.createElement('label');
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(reponses[i].text));
+        
+        // Ajout de l'étiquette à la div
+        divInput.appendChild(label);
+        divInput.appendChild(document.createElement("br"));
+    }
+} 
 
-// ajout des propositions de réponse de la 1er question sous forme de checkbox 
-// Récupération de la div contenant les inputs
-let divInput1 = document.getElementById('question1');
-// Boucle pour créer un input par proposition de réponse
-for (let i = 0; i < shuffledRepQ1.length; i++) {
-    // Création de l'input
-    const input = document.createElement('input');
-    
-    // Ajout de l'attribut "type" de type "checkbox"
-    input.setAttribute('type', 'checkbox');
-    
-    // Ajout de la valeur de la proposition de réponse
-    input.value = shuffledRepQ1[i].text;
-    
-    // Création de l'étiquette pour l'input
-    const label = document.createElement('label');
-    label.appendChild(input);
-    label.appendChild(document.createTextNode(shuffledRepQ1[i].text));
-    
-    // Ajout de l'étiquette à la div
-    divInput1.appendChild(label);
-    divInput1.appendChild(document.createElement("br"));
-}
-
-// ajout des propositions de réponse de la 2e question sous forme de checkbox 
-// Récupération de la div contenant les inputs
-let divInput2 = document.getElementById('question2');
-// Boucle pour créer un input par proposition de réponse
-for (let i = 0; i < shuffledRepQ2.length; i++) {
-    // Création de l'input
-    const input = document.createElement('input');
-    
-    // Ajout de l'attribut "type" de type "checkbox"
-    input.setAttribute('type', 'checkbox');
-    
-    // Ajout de la valeur de la proposition de réponse
-    input.value = shuffledRepQ2[i].text;
-    
-    // Création de l'étiquette pour l'input
-    const label = document.createElement('label');
-    label.appendChild(input);
-    label.appendChild(document.createTextNode(shuffledRepQ2[i].text));
-    
-    // Ajout de l'étiquette à la div
-    divInput2.appendChild(label);
-    divInput2.appendChild(document.createElement("br"));
-}
-
-// ajout des propositions de réponse de la 3e question sous forme de checkbox 
-// Récupération de la div contenant les inputs
-let divInput3 = document.getElementById('question3');
-// Boucle pour créer un input par proposition de réponse
-for (let i = 0; i < shuffledRepQ3.length; i++) {
-    // Création de l'input
-    const input = document.createElement('input');
-    
-    // Ajout de l'attribut "type" de type "checkbox"
-    input.setAttribute('type', 'checkbox');
-    
-    // Ajout de la valeur de la proposition de réponse
-    input.value = shuffledRepQ3[i].text;
-    
-    // Création de l'étiquette pour l'input
-    const label = document.createElement('label');
-    label.appendChild(input);
-    label.appendChild(document.createTextNode(shuffledRepQ3[i].text));
-    
-    // Ajout de l'étiquette à la div
-    divInput3.appendChild(label);
-    divInput3.appendChild(document.createElement("br"));
-}
-// ajout des propositions de réponse de la 4e question sous forme de checkbox 
-// Récupération de la div contenant les inputs
-let divInput4 = document.getElementById('question4');
-// Boucle pour créer un input par proposition de réponse
-for (let i = 0; i < shuffledRepQ4.length; i++) {
-    // Création de l'input
-    const input = document.createElement('input');
-    
-    // Ajout de l'attribut "type" de type "checkbox"
-    input.setAttribute('type', 'checkbox');
-    
-    // Ajout de la valeur de la proposition de réponse
-    input.value = shuffledRepQ4[i].text;
-    
-    // Création de l'étiquette pour l'input
-    const label = document.createElement('label');
-    label.appendChild(input);
-    label.appendChild(document.createTextNode(shuffledRepQ4[i].text));
-    
-    // Ajout de l'étiquette à la div
-    divInput4.appendChild(label);
-    divInput4.appendChild(document.createElement("br"));
-}
-
-// ajout des propositions de réponse de la 5e question sous forme de checkbox 
-// Récupération de la div contenant les inputs
-let divInput5 = document.getElementById('question5');
-// Boucle pour créer un input par proposition de réponse
-for (let i = 0; i < shuffledRepQ5.length; i++) {
-    // Création de l'input
-    const input = document.createElement('input');
-    
-    // Ajout de l'attribut "type" de type "checkbox"
-    input.setAttribute('type', 'checkbox');
-    
-    // Ajout de la valeur de la proposition de réponse
-    input.value = shuffledRepQ5[i].text;
-    
-    // Création de l'étiquette pour l'input
-    const label = document.createElement('label');
-    label.appendChild(input);
-    label.appendChild(document.createTextNode(shuffledRepQ5[i].text));
-    
-    // Ajout de l'étiquette à la div
-    divInput5.appendChild(label);
-    divInput5.appendChild(document.createElement("br"));
-}
+showReponses(1)
+showReponses(2)
+showReponses(3)
+showReponses(4)
+showReponses(5)
