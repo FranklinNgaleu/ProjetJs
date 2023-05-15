@@ -229,3 +229,108 @@ function afficherScore(score) {
     btnSoumettre.textContent = "Recommencer"
     btnSoumettre.setAttribute('onclick', 'window.location.reload()')
 }
+
+const afficherDivsBtn = document.getElementById('debut');
+let suite = document.getElementById('suite')
+
+function afficherQ1(){
+    let divQuestions = []
+    for (let i = 1; i <= 5; i++) {
+        divQuestions.push(document.getElementById(`question${i}`));
+    }
+    divQuestions.forEach(item => item.hidden = 'true')
+    divQuestions[0].hidden = false;
+    suite.hidden = false;
+    afficherDivsBtn.hidden = true;
+}
+
+
+let suite1 = document.getElementById('suite1')
+function afficherQ2(){
+    let divQuestions = []
+    for (let i = 1; i <= 5; i++) {
+        divQuestions.push(document.getElementById(`question${i}`));
+    }
+    divQuestions.forEach(item => item.hidden = 'true')
+    divQuestions[1].hidden = false;
+    suite1.hidden = false;
+    suite.hidden = true;
+}
+
+
+let suite2 = document.getElementById('suite2')
+function afficherQ3(){
+    let divQuestions = []
+    for (let i = 1; i <= 5; i++) {
+        divQuestions.push(document.getElementById(`question${i}`));
+    }
+    divQuestions.forEach(item => item.hidden = 'true')
+    divQuestions[2].hidden = false;
+    suite2.hidden = false;
+    suite1.hidden = true;
+}
+
+
+let suite3 = document.getElementById('suite3')
+
+function afficherQ4(){
+    let divQuestions = []
+    for (let i = 1; i <= 5; i++) {
+        divQuestions.push(document.getElementById(`question${i}`));
+    }
+    divQuestions.forEach(item => item.hidden = 'true')
+    divQuestions[3].hidden = false;
+    suite3.hidden = false;
+    suite2.hidden = true;
+}
+
+
+let submit = document.getElementById('submit')
+function afficherQ5(){
+    let divQuestions = []
+    for (let i = 1; i <= 5; i++) {
+        divQuestions.push(document.getElementById(`question${i}`));
+    }
+    divQuestions.forEach(item => item.hidden = 'true')
+    divQuestions[4].hidden = false;
+    suite3.hidden = true;
+    submit.hidden = false;
+}
+
+
+
+
+// let i = 0;
+// afficherDivsBtn.addEventListener('click', () => {
+//   const interval = setInterval(() => {
+    
+//     if (i === divQuestions.length) {
+//       clearInterval(interval);
+//     }
+//   }, 1500);
+// });
+
+
+
+//const container = document.querySelector('.container');
+//const contents = document.querySelectorAll('.content');
+const bouton = document.querySelector('#bouton');
+let index = 0;
+
+bouton.addEventListener('click', () => {
+  container.style.display = 'flex';
+  setInterval(() => {
+    if (index >= contents.length) {
+      index = 0;
+    }
+    for (let i = 0; i < contents.length; i++) {
+      if (i === index) {
+        contents[i].style.display = 'block';
+      } else {
+        contents[i].style.display = 'none';
+      }
+    }
+    index++;
+  }, 15000);
+});
+

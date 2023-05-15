@@ -3,41 +3,45 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
     <title>Quizz</title>
   </head>
   <body>
-    <form>
-        <div id="question1">
-            <h2>Question 1</h2>
-            <p>Combien d'acteurs y a t'il sur un stade de foot pendant un match ?</p>
-        </div>
-      
-        <div id="question2">
-            <h2>Question 2</h2>
-            <p>Quel est le nom du stade de Marseille? ?</p>
-        </div>
-      
-        <div id="question3">
-            <h2>Question 3</h2>
-            <p>Qui est l'entraineur de l'équipe de France ?</p>
-        </div>
-      
-        <div id="question4">
-            <h2>Question 4</h2>
-            <p>Le FC Barcelone a remporté la ligue des champions en 2017 ?</p>
-        </div>
+    <h1>Quizz Foot</h1>
+    
+    <div id="question1" hidden>
+        <h2>Question 1</h2>
+        <p>Combien d'acteurs y a t'il sur un stade de foot pendant un match ?</p>
+    </div>
+    
+    <div id="question2" hidden>
+        <h2>Question 2</h2>
+        <p>Quel est le nom du stade de Marseille? ?</p>
+    </div>
+  
+    <div id="question3" hidden>
+        <h2>Question 3</h2>
+        <p>Qui est l'entraineur de l'équipe de France ?</p>
+    </div>
+  
+    <div id="question4" hidden>
+        <h2>Question 4</h2>
+        <p>Le FC Barcelone a remporté la ligue des champions en 2017 ?</p>
+    </div>
 
-      <div id="question5">
-          <h2>Question 5</h2>
-          <p>Le football est il un sport?</p>
-      </div>
+    <div id="question5" hidden>
+        <h2>Question 5</h2>
+        <p>Le football est il un sport?</p>
+    </div>
 
-      <div id="score" hidden>
-        <h1>Score</h1>
-      </div>
-
-      <button id="submit" style="margin-top: 20px;" onclick="verifReponses()">Soumettre</button>
+    <div id="score" hidden>
+      <h1>Score</h1>
+    </div>
+    <button id="debut" onclick="afficherQ1()">Commencer</button>
+    <button id="suite" onclick="afficherQ2()" hidden>Suivant</button>
+    <button id="suite1" onclick="afficherQ3()" hidden>Suivant</button>
+    <button id="suite2" onclick="afficherQ4()" hidden>Suivant</button>
+    <button id="suite3" onclick="afficherQ5()" hidden>Suivant</button>
+    <button id="submit" style="margin-top: 20px;" onclick="verifReponses()" hidden>Soumettre</button>
     <script src="script.js"></script>
   </body>
 </html>
