@@ -185,5 +185,26 @@ function verifReponses() {
     score = (!(typeof reponse4 === 'undefined') && reponse4.bonneRep) ? score + 1 : score
     score = (!(typeof reponse5 === 'undefined') && reponse5.bonneRep) ? score + 1 : score
 
-    return score
+    afficherScore(score)
+}
+
+
+function afficherScore(score) {
+    let divQuestions = []
+    for (let i = 1; i <= 5; i++) {
+        divQuestions.push(document.getElementById(`question${i}`));
+    }
+    let btnSoumettre = document.getElementById('submit')
+
+    let divScore = document.getElementById('score')
+
+    let textScore = document.createElement('h2')
+    textScore.textContent = (score == 5) ? `${score} / 5 , bravo !` : `${score} / 5`
+
+    divScore.appendChild(textScore)
+
+    divQuestions.forEach(item => item.hidden = 'true')
+    divScore.hidden = false
+    btnSoumettre.textContent = "Recommencer"
+    btnSoumettre.setAttribute('onclick', 'window.location.reload()')
 }
