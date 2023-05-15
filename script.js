@@ -179,11 +179,11 @@ function verifReponses() {
     const reponse5 = shuffledRepQ5.find(element => element.text == getReponse(5))
     let score = 0
 
-    score = (reponse1.bonneRep) ? score + 1 : score
-    score = (reponse2.bonneRep) ? score + 1 : score
-    score = (reponse3.bonneRep) ? score + 1 : score
-    score = (reponse4.bonneRep) ? score + 1 : score
-    score = (reponse5.bonneRep) ? score + 1 : score
+    score = (!(typeof reponse1 === 'undefined') && reponse1.bonneRep) ? score + 1 : score
+    score = (!(typeof reponse2 === 'undefined') && reponse2.bonneRep) ? score + 1 : score
+    score = (!(typeof reponse3 === 'undefined') && reponse3.bonneRep) ? score + 1 : score
+    score = (!(typeof reponse4 === 'undefined') && reponse4.bonneRep) ? score + 1 : score
+    score = (!(typeof reponse5 === 'undefined') && reponse5.bonneRep) ? score + 1 : score
 
-    console.log(score)
+    return score
 }
