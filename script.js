@@ -109,6 +109,7 @@ const shuffledRepQ3 = shuffle(reponsesQ3)
 const shuffledRepQ4 = shuffle(reponsesQ4)
 const shuffledRepQ5 = shuffle(reponsesQ5)
 
+// Affiche les propositions de réponse d'une question
 function showReponses(numQuestion) {
     // Récupération de la div contenant les inputs
     let divInput = document.getElementById(`question${numQuestion}`);
@@ -156,55 +157,75 @@ function showReponses(numQuestion) {
     }
 } 
 
+// Affiche les propositions de réponse de chaque questions sur la page
 showReponses(1)
 showReponses(2)
 showReponses(3)
 showReponses(4)
 showReponses(5)
 
+// Renvoie les réponses de l'utilisateur sur une question
 function getReponse(numQuestion) {
+    // Liste des propositions de réponse sur la page 
     const listReponses = document.getElementsByName(`reponsesQ${numQuestion}`)
 
+    // Cherche parmi cette liste la réponse cochée
     for (let i = 0; i < listReponses.length; i++) {
         if (listReponses[i].checked) { var reponse = listReponses[i].value}
     }
+    // Renvoie le résultat
     return reponse
 }
 
+// Vérifie les réponses et calcule le score de l'utilisateur 
 function verifReponses() {
+    // Récupère les réponses de l'utilisateur sur chaque question puis sélectionne l'élément correspondant dans les array DATAS
     const reponse1 = shuffledRepQ1.find(element => element.text == getReponse(1))
     const reponse2 = shuffledRepQ2.find(element => element.text == getReponse(2))
     const reponse3 = shuffledRepQ3.find(element => element.text == getReponse(3))
     const reponse4 = shuffledRepQ4.find(element => element.text == getReponse(4))
     const reponse5 = shuffledRepQ5.find(element => element.text == getReponse(5))
+    // Initialisation du score à 0
     let score = 0
 
+    // CALCUL DU SCORE 
+    // SI une réponse a été cochée ET cette réponse est la bonne ALORS on ajoute 1 au score (sinon le score ne change pas)
     score = (!(typeof reponse1 === 'undefined') && reponse1.bonneRep) ? score + 1 : score
     score = (!(typeof reponse2 === 'undefined') && reponse2.bonneRep) ? score + 1 : score
     score = (!(typeof reponse3 === 'undefined') && reponse3.bonneRep) ? score + 1 : score
     score = (!(typeof reponse4 === 'undefined') && reponse4.bonneRep) ? score + 1 : score
     score = (!(typeof reponse5 === 'undefined') && reponse5.bonneRep) ? score + 1 : score
 
+    // Envoie le score à la fonction qui affiche le score 
     afficherScore(score)
 }
 
-
+// Masque les questions et affiche le score sur la page
 function afficherScore(score) {
+    // Récupère les éléments <div> contenant les questions
     let divQuestions = []
     for (let i = 1; i <= 5; i++) {
         divQuestions.push(document.getElementById(`question${i}`));
     }
+    // Récupération de l'élément du bouton 'Soumettre'
     let btnSoumettre = document.getElementById('submit')
 
+    // Récupération du div contenant le score
     let divScore = document.getElementById('score')
 
+    // Création d'un élément affichant la valeur du score
     let textScore = document.createElement('h2')
     textScore.textContent = (score == 5) ? `${score} / 5 , bravo !` : `${score} / 5`
 
+    // Ajoute cet élément à l'élément div du score
     divScore.appendChild(textScore)
 
+    // Masque les questions 
     divQuestions.forEach(item => item.hidden = 'true')
+    // Affiche la section 'Score'
     divScore.hidden = false
+
+    // Modifie le bouton 'Soumettre' en un bouton 'Recommencer' qui rafraichit et donc réinitialise la page
     btnSoumettre.textContent = "Recommencer"
     btnSoumettre.setAttribute('onclick', 'window.location.reload()')
 }
