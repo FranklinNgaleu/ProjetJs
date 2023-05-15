@@ -177,8 +177,21 @@ function getReponse(numQuestion) {
     return reponse
 }
 
+// Eléments bouton de la page 
+const btnSubmit = document.getElementById('submit');
+const btnDivs = document.getElementById('next');
+const btnReset = document.getElementById('reset');
+const textTimer = document.getElementById('textTimer');
+
 // Vérifie les réponses et calcule le score de l'utilisateur 
 function verifReponses() {
+    // Arrete le timer et le masque, ainsi que le bouton 'Soumettre'
+    if (timerInterv) {
+        clearInterval(timerInterv) 
+        textTimer.hidden = true
+    }
+    btnSubmit.hidden = true
+
     // Récupère les réponses de l'utilisateur sur chaque question puis sélectionne l'élément correspondant dans les array DATAS
     const reponse1 = shuffledRepQ1.find(element => element.text == getReponse(1))
     const reponse2 = shuffledRepQ2.find(element => element.text == getReponse(2))
@@ -207,8 +220,6 @@ function afficherScore(score) {
     for (let i = 1; i <= 5; i++) {
         divQuestions.push(document.getElementById(`question${i}`));
     }
-    // Récupération de l'élément du bouton 'Soumettre'
-    let btnSoumettre = document.getElementById('submit')
 
     // Récupération du div contenant le score
     let divScore = document.getElementById('score')
@@ -224,81 +235,98 @@ function afficherScore(score) {
     divQuestions.forEach(item => item.hidden = 'true')
     // Affiche la section 'Score'
     divScore.hidden = false
-
-    // Modifie le bouton 'Soumettre' en un bouton 'Recommencer' qui rafraichit et donc réinitialise la page
-    btnSoumettre.textContent = "Recommencer"
-    btnSoumettre.setAttribute('onclick', 'window.location.reload()')
 }
 
-const afficherDivsBtn = document.getElementById('debut');
-let suite = document.getElementById('suite')
+// Variable servant d'identifiant pour l'interval
+let timerInterv
 
-function afficherQ1(){
+// Démarre un timer, 'time' est la durée du timer et 'mode' permet d'identifier si on passe a la question suivante ou si on termine le quizz
+function startTimer(time, mode) {
+    // Element du décompte timer
+    let decompte = document.getElementById("timer")
+    // Initialisation du texte du timer 
+    decompte.textContent = time
+    
+    // Lancement du timer
+    timerInterv = setInterval(() => {
+        // Si le temps restant est supérieur à 0, on désincrémente de 1
+        if (time > 0) {
+            time--
+            decompte.textContent = time
+        }
+
+        // Le temps s'est écoulé
+        else {
+            // Stoppe l'interval pour économiser des ressources
+            clearInterval(timerInterv)
+            
+            // Si on est en mode 'next' alors on passe à la question suivante
+            if (mode == 'next') {
+                afficherQSuivante()
+            }
+            // Si on est en mode 'end' alors on appelle la fonction qui calcule le score, et on masque le timer
+            else if (mode == 'end') {
+                verifReponses()
+                textTimer.hidden = true
+            }
+        }
+    // Délai a 1000 ms, la fonction s'éxécutera donc toutes les secondes
+    }, 1000);
+}
+
+// Index de la question à afficher
+let indexQuestion = 0
+
+// Gère l'affichage des questions
+function afficherQSuivante(){
+    // Arrete le timer
+    if (timerInterv) {
+        clearInterval(timerInterv) 
+    }
+
+    // Cache toutes les questions
     let divQuestions = []
     for (let i = 1; i <= 5; i++) {
         divQuestions.push(document.getElementById(`question${i}`));
     }
     divQuestions.forEach(item => item.hidden = 'true')
-    divQuestions[0].hidden = false;
-    suite.hidden = false;
-    afficherDivsBtn.hidden = true;
-}
 
+    // Valeur de temps du timer
+    let timeValue = 10
 
-let suite1 = document.getElementById('suite1')
-function afficherQ2(){
-    let divQuestions = []
-    for (let i = 1; i <= 5; i++) {
-        divQuestions.push(document.getElementById(`question${i}`));
+    switch (indexQuestion) {
+        // Première question : On lance et affiche le timer en mode 'next', le bouton 'Recommencer' et la question, et on change le text du bouton 'Commencer' en 'Suivant'
+        case 0:
+            textTimer.hidden = false
+            btnDivs.textContent = 'Suivant'
+            btnReset.hidden = false
+            divQuestions[indexQuestion].hidden = false;
+            startTimer(timeValue, 'next')
+            break;
+
+        // Questions 2, 3 et 4 : on affiche la question et on lance un timer en mode 'next'
+        case 1:
+        case 2:
+        case 3:
+            divQuestions[indexQuestion].hidden = false;
+            startTimer(timeValue, 'next')
+            break;
+
+        // Dernière question : on lance le timer en mode 'end', on masque le bouton 'Suivant' et on affiche à la place le bouton 'Soumettre'
+        case 4:
+            divQuestions[indexQuestion].hidden = false;
+            startTimer(timeValue, 'end')
+            btnDivs.hidden = true
+            btnSubmit.hidden = false
+            break;
     }
-    divQuestions.forEach(item => item.hidden = 'true')
-    divQuestions[1].hidden = false;
-    suite1.hidden = false;
-    suite.hidden = true;
+
+    // Incrémente l'index de la question
+    indexQuestion++
 }
 
 
-let suite2 = document.getElementById('suite2')
-function afficherQ3(){
-    let divQuestions = []
-    for (let i = 1; i <= 5; i++) {
-        divQuestions.push(document.getElementById(`question${i}`));
-    }
-    divQuestions.forEach(item => item.hidden = 'true')
-    divQuestions[2].hidden = false;
-    suite2.hidden = false;
-    suite1.hidden = true;
-}
-
-
-let suite3 = document.getElementById('suite3')
-
-function afficherQ4(){
-    let divQuestions = []
-    for (let i = 1; i <= 5; i++) {
-        divQuestions.push(document.getElementById(`question${i}`));
-    }
-    divQuestions.forEach(item => item.hidden = 'true')
-    divQuestions[3].hidden = false;
-    suite3.hidden = false;
-    suite2.hidden = true;
-}
-
-
-let submit = document.getElementById('submit')
-function afficherQ5(){
-    let divQuestions = []
-    for (let i = 1; i <= 5; i++) {
-        divQuestions.push(document.getElementById(`question${i}`));
-    }
-    divQuestions.forEach(item => item.hidden = 'true')
-    divQuestions[4].hidden = false;
-    suite3.hidden = true;
-    submit.hidden = false;
-}
-
-
-
+// TESTS DE FRANKLIN
 
 // let i = 0;
 // afficherDivsBtn.addEventListener('click', () => {
@@ -314,23 +342,23 @@ function afficherQ5(){
 
 //const container = document.querySelector('.container');
 //const contents = document.querySelectorAll('.content');
-const bouton = document.querySelector('#bouton');
-let index = 0;
+// const bouton = document.querySelector('#bouton');
+// let index = 0;
 
-bouton.addEventListener('click', () => {
-  container.style.display = 'flex';
-  setInterval(() => {
-    if (index >= contents.length) {
-      index = 0;
-    }
-    for (let i = 0; i < contents.length; i++) {
-      if (i === index) {
-        contents[i].style.display = 'block';
-      } else {
-        contents[i].style.display = 'none';
-      }
-    }
-    index++;
-  }, 15000);
-});
+// bouton.addEventListener('click', () => {
+//   container.style.display = 'flex';
+//   setInterval(() => {
+//     if (index >= contents.length) {
+//       index = 0;
+//     }
+//     for (let i = 0; i < contents.length; i++) {
+//       if (i === index) {
+//         contents[i].style.display = 'block';
+//       } else {
+//         contents[i].style.display = 'none';
+//       }
+//     }
+//     index++;
+//   }, 15000);
+// });
 

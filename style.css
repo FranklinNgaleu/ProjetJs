@@ -5,25 +5,3 @@ h2{
 p{
     margin-bottom: -2px;
 }
-
-div {
-    border: 1px solid black;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-  
-  .hidden {
-    display: none;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-}
-  
-  .content {
-    display: none;
-}
-  
-  
-  

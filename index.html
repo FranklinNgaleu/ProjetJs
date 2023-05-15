@@ -7,6 +7,8 @@
   </head>
   <body>
     <h1>Quizz Foot</h1>
+
+    <p id="textTimer" hidden>Temps restant : <span id="timer"></span> secondes</p>
     
     <div id="question1" hidden>
         <h2>Question 1</h2>
@@ -36,12 +38,9 @@
     <div id="score" hidden>
       <h1>Score</h1>
     </div>
-    <button id="debut" onclick="afficherQ1()">Commencer</button>
-    <button id="suite" onclick="afficherQ2()" hidden>Suivant</button>
-    <button id="suite1" onclick="afficherQ3()" hidden>Suivant</button>
-    <button id="suite2" onclick="afficherQ4()" hidden>Suivant</button>
-    <button id="suite3" onclick="afficherQ5()" hidden>Suivant</button>
+    <button id="next" style="margin-top: 20px;" onclick="afficherQSuivante()">Commencer</button>
     <button id="submit" style="margin-top: 20px;" onclick="verifReponses()" hidden>Soumettre</button>
+    <button id="reset"style="margin-top: 20px;" onclick="window.location.reload()" hidden>Recommencer</button>
     <script src="script.js"></script>
   </body>
 </html>
